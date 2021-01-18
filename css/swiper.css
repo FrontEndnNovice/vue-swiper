@@ -2,7 +2,7 @@
     width: 600px;
     height: 400px;
     margin: 0 auto;
-    border: solid 2px #ca539d;
+    /* border: solid 2px #ca539d; */
     position: relative;
 }
 .box img{

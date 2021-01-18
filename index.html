@@ -10,25 +10,32 @@
         *{
             list-style: none;
             text-decoration: none;
-            
             margin: 0;
             padding: 0;
         }
         a{
             color: black;
         }
+        #app{
+            background-color: rgb(243, 241, 240);
+        }
+        .bigbox{
+            margin-top: 100px;
+            background-color: rgb(243, 241, 240);
+        }
         .conter{
             width: 1200px;
             height: 400px;
             margin: 0 auto;
-            border: solid 2px #e286d6;
+            /* border: solid 2px #e286d6; */
         }
         .conter-left{
             width: 190px;
             height: 400px;
-            margin-right: 5px;
-            border: solid 1px #7a7a7a;
+            margin-right: 10px;
+            /* border: solid 1px #7a7a7a; */
             float: left;
+            background-color: #fff;
         }
         .conter-left ul li{
             font-family: 楷体;
@@ -43,14 +50,68 @@
             width: 600px;
             height: 400px;
             margin-right: 5px;
-            border: solid 1px #704b4b;
+            /* border: solid 1px #704b4b; */
             float: left;
         }
         .conter-list{
             width: 180px;
             height: 400px;
-            border: solid 1px #edf058;
+            /* border: solid 1px #edf058; */
             float: left;
+            position: relative;
+        }
+        .conter-list ul li{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 1s;
+        }
+        .conter-list img{
+            width: 180px;
+            height: 120px;
+            margin-bottom: 10px;
+            margin-top: 3px;
+            transition: all 1s;
+        }
+        .conter .upsmall,
+        .conter .nextsmall{
+            width: 30px;
+            height: 30px;
+            display: block;
+            background-color: rgb(206, 206, 146);
+            opacity: 0.3;
+            line-height: 30px;
+            text-align: center;
+            font-size: larger;
+        }
+        .conter .upsmall:hover,
+        .conter .nextsmall:hover{
+            opacity: 0.8;
+        }
+        .conter .upsmall{
+            position: absolute;
+            top: 185px;
+            left: 0;
+            z-index: 10;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+            cursor: pointer;
+        }
+        .conter .nextsmall{
+            position: absolute;
+            top: 185px;
+            right: 0;
+            z-index: 10;
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+            cursor: pointer;
+        }
+        .conter-list ul li.smallactive{
+            z-index: 5;
+            position: all 1s;
         }
         .conter-right{
             width: 200px;
@@ -84,12 +145,26 @@
                         <span class="up" @mouseover="cleargo()" @mouseout="go()" @click="goup()"><</span>   
                         <span class="next" @mouseover="cleargo()" @mouseout="go()" @click = "gonext()">></span>
                         <ul class="ullist">
-                            <li v-for="(item,i) in imgList" :class="{active:i===count}" @click = "count = i"></li>
+                            <li v-for="(item,u) in imgList" :class="{active:u===count}" @click = "count = u"></li>
                         </ul>
                     </div>
                 </div>
-                <div class="conter-list"></div>
-                <div class="conter-right"></div>
+                <div class="conter-list">
+                    <div class="small">
+                        <ul>
+                            <li v-for="(item,l) in smallimg" key="l" :class="{smallactive: l == smallcount}">
+                                <img v-for="(child,n) in item" :src="child" key="n" alt="">
+                            </li>
+                        </ul>
+                        <span class="upsmall" @click="upsmall()"><</span>
+                        <span class="nextsmall" @click="nextsmall()">></span>
+                    </div>
+                </div>
+                <div class="conter-right">
+                    <div>
+                        
+                    </div>
+                </div>
             </div>
         </div>
         <!-- <div class="box">
@@ -110,8 +185,19 @@
         var app = new Vue({
             el:"#app",
             data:{
-                imgList: ["img/icon01.jpg","img/icon02.jpg","img/icon03.jpg","img/icon04.jpg"],
+                imgList: [
+                    "img/swiper/icon01.jpg",
+                    "img/swiper/icon02.jpg",
+                    "img/swiper/icon03.jpg",
+                    "img/swiper/icon04.jpg"
+                ],
+                smallimg: [
+                    ["img/smallswiper/small01.jpg","img/smallswiper/small02.jpg","img/smallswiper/small03.jpg"],
+                    ["img/smallswiper/small04.jpg","img/smallswiper/small05.jpg","img/smallswiper/small06.jpg"],
+                    ["img/smallswiper/small07.jpg","img/smallswiper/small08.jpg","img/smallswiper/small09.jpg"]
+                ],
                 count: 0,
+                smallcount: 0,
                 clear: null,
                 textlist: [
                     ["家用电器"],
@@ -135,7 +221,6 @@
             methods:{
                 go() {
                     this.clear = setInterval(() => {
-                        console.log(this.count);
                         this.count++;
                         if(this.count === this.imgList.length){
                             this.count = 0;
@@ -159,6 +244,18 @@
                         this.count = 0
                     }
                    
+                },
+                upsmall() {
+                    if(this.smallcount === 0) {
+                        this.smallcount = this.smallimg.length;
+                    }
+                    this.smallcount--;
+                },
+                nextsmall() {
+                    this.smallcount++;
+                    if(this.smallcount === this.smallimg.length) {
+                        this.smallcount = 0;
+                    }
                 }
             },
             mounted() {
