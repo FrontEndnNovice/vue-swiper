@@ -6,145 +6,132 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vue轮播图</title>
     <link rel="stylesheet" href="css/swiper.css">
+    <link rel="stylesheet" href="css/bigbox.css">
     <style>
-        *{
-            list-style: none;
-            text-decoration: none;
-            margin: 0;
-            padding: 0;
-        }
-        a{
-            color: black;
-        }
-        #app{
-            background-color: rgb(243, 241, 240);
-        }
-        .bigbox{
-            margin-top: 100px;
-            background-color: rgb(243, 241, 240);
-        }
-        .conter{
-            width: 1200px;
-            height: 400px;
-            margin: 0 auto;
-            /* border: solid 2px #e286d6; */
-        }
-        .conter-left{
-            width: 190px;
-            height: 400px;
-            margin-right: 10px;
-            /* border: solid 1px #7a7a7a; */
-            float: left;
+        .head-top{
+            width: 100%;
             background-color: #fff;
         }
-        .conter-left ul li{
-            font-family: 楷体;
-            margin-top: 5px;
-            margin-left: 5px;
-            font-size: 14px;
+        .head-jd{
+            width: 1200px;
+            height: 80px;
+            margin: 0 auto;
         }
-        .conter-left ul li span:hover{
-            color:burlywood;
+        .head-jd img{
+            width: 1200px;
+            height: 80px;
         }
-        .conter-swiper{
-            width: 600px;
-            height: 400px;
-            margin-right: 5px;
-            /* border: solid 1px #704b4b; */
+        .head-nav{
+            width: 1200px;
+            height: 140px;
+            margin: 0 auto;
+        }
+        .nav__left{
+            width: 190px;
+            height: 140px;
             float: left;
         }
-        .conter-list{
-            width: 180px;
-            height: 400px;
-            /* border: solid 1px #edf058; */
+        .nav__left img{
+            width: 190px;
+            height: 140px;
+        }
+        .nav__conter{
+            width: 800px;
+            height: 140px;
             float: left;
-            position: relative;
         }
-        .conter-list ul li{
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: all 1s;
+        .head-nav .nav__right{
+            width: 1900px;
+            height: 140px;
+            /* float: right; */
         }
-        .conter-list img{
-            width: 180px;
-            height: 120px;
-            margin-bottom: 10px;
-            margin-top: 3px;
-            transition: all 1s;
+        .nav__right img{
+            width: 190px;
+            height: 140px;
         }
-        .conter .upsmall,
-        .conter .nextsmall{
-            width: 30px;
+        .conter--search__text,
+        .conter--search__btn{
+            border: solid 1px rgb(253, 101, 0);
             height: 30px;
-            display: block;
-            background-color: rgb(206, 206, 146);
-            opacity: 0.3;
-            line-height: 30px;
-            text-align: center;
-            font-size: larger;
+            
+            margin-top: 20px;
         }
-        .conter .upsmall:hover,
-        .conter .nextsmall:hover{
-            opacity: 0.8;
+        .conter--search__text{
+            margin-left: 100px;
+            width: 300px;
         }
-        .conter .upsmall{
-            position: absolute;
-            top: 185px;
-            left: 0;
-            z-index: 10;
-            border-top-right-radius: 30px;
-            border-bottom-right-radius: 30px;
-            cursor: pointer;
-        }
-        .conter .nextsmall{
-            position: absolute;
-            top: 185px;
-            right: 0;
-            z-index: 10;
-            border-top-left-radius: 30px;
-            border-bottom-left-radius: 30px;
-            cursor: pointer;
-        }
-        .conter-list ul li.smallactive{
-            z-index: 5;
-            position: all 1s;
-        }
-        .conter-right{
-            width: 200px;
-            height: 400px;
-            /* border: solid 1px #5867f0; */
-            float: right;
-        }
-        .jd-top{
-            width: 200px;
-            height: 100px;
+        .conter--search__btn{
+            background-color: rgb(253, 101, 0);
+            height: 32px;
+            width: 40px;
+            border: none;
 
         }
-        .jd-top img{
-            width: 200px;
-            height: 100px;
+        .conter--menu{
+            margin-left: 100px;
+            font-size: 10px;
         }
-        .jd-conter,
-        .jd-bottom{
-            width: 200px;
-            height: 150px;
+        .conter--menu ul li{
+            float: left;
+            margin-right: 10px;
         }
-        .jd-conter img{
-            width: 200px;
-            height: 150px;
+        .conter--bigmenu{
+            clear: both;
+            margin-top: 40px;
+            font-size: 20px;
         }
-        .jd-bottom img{
-            width: 200px;
-            height: 150px;
+        .conter--bigmenu ul li{
+            float: left;
+            margin-right: 20px;
+            font-family: 'Courier New', Courier, monospace;
         }
     </style>
+
 </head>
 <body>
     <div id="app">
+        <div class="head">
+            <div class="head-jd">
+                <a href="#">
+                    <img src="img/jd/jd04.jpg" alt="">
+                </a>
+            </div>
+            <div class="head-top">
+                <div class="head-nav">
+                    <div class="nav__left">
+                        <a href="#">
+                            <img src="img/jd/jd05.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="nav__conter">
+                        <div class="conter--search">
+                            <input type="text" class="conter--search__text"><input class="conter--search__btn" type="button" value="搜索">
+                        </div>
+                        <div class="conter--menu">
+                            <ul>
+                                <li v-for="(item,index) in contermenu" key="index"><a href="#">{{item}}</a></li>
+                            </ul>
+                        </div>
+                        <div class="conter--bigmenu">
+                            <ul>
+                                <li v-for="(item,index in conterbigmenu">
+                                    <a href="#">
+                                        {{item}}
+                                    </a>
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="nav__right">
+                        <a href="#">
+                            <img src="img/jd/jd06.jpg" alt="">
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class="bigbox">
             <div class="conter">
                 <div class="conter-left">
@@ -246,8 +233,11 @@
                     ["理财","众筹","白条","保险"],
                     ["安装","维修","清洗","二手"],
                     ["工业品"]
-                ]
+                ],
+                contermenu: [ "企业年会计","奶酪","家清纸品","车主福利","寒假阅读","二手手机","品质男孩","教育电视","低至9.9"],
+                conterbigmenu: ["秒杀","优惠券","PLUS会员","品牌闪购","拍卖","京东家电","京东超市","京东生鲜"]
             },
+
             methods:{
                 go() {
                     this.clear = setInterval(() => {
@@ -275,6 +265,15 @@
                     }
                    
                 },
+                gosmall() {
+                    setInterval(() => {
+                        this.smallcount++;
+                        if(this.smallcount === this.smallimg.length) {
+                            this.smallcount = 0;
+                        }
+                        
+                    },4000)
+                },
                 upsmall() {
                     if(this.smallcount === 0) {
                         this.smallcount = this.smallimg.length;
@@ -290,6 +289,7 @@
             },
             mounted() {
                 this.go();
+                this.gosmall();
                 console.log(this.count);
             }
 
