@@ -7,86 +7,92 @@
     <title>vue轮播图</title>
     <link rel="stylesheet" href="css/swiper.css">
     <style>
-        /* .box{
-            width: 600px;
+        *{
+            list-style: none;
+            text-decoration: none;
+            
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            color: black;
+        }
+        .conter{
+            width: 1200px;
             height: 400px;
             margin: 0 auto;
-            border: solid 2px #ca539d;
-            position: relative;
+            border: solid 2px #e286d6;
         }
-        .box img{
+        .conter-left{
+            width: 190px;
+            height: 400px;
+            margin-right: 5px;
+            border: solid 1px #7a7a7a;
+            float: left;
+        }
+        .conter-left ul li{
+            font-family: 楷体;
+            margin-top: 5px;
+            margin-left: 5px;
+            font-size: 14px;
+        }
+        .conter-left ul li span:hover{
+            color:burlywood;
+        }
+        .conter-swiper{
             width: 600px;
             height: 400px;
-            opacity: 1;
-            transition: all 1s;
-
-        }
-        .lettershow{
-            transition: all 1s;
-            opacity: 1;
-           
-        }
-        .box .up{
-            position:absolute;
-            top: 150px;
-            left: 0px;
-            width: 50px;
-            height: 100px;
-            background-color: rgba(200,100,100,.3);
-            display: block;
-            line-height: 100px;
-            font-size: 20px;
-            text-align: center;
-            cursor: pointer;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-
-        }
-        .box .up:hover,
-        .box .next:hover{
-            background-color: rgba(200,100,100,.7);
-        }
-        .box .next{
-            position:absolute;
-            top: 150px;
-            right: 0px;
-            width: 50px;
-            height: 100px;
-            background-color: rgba(200,100,100,.3);
-            display: block;
-            line-height: 100px;
-            font-size: 20px;
-            text-align: center;
-            cursor: pointer;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-
-
-        }
-        .box .ullist{
-            position: absolute;
-            bottom: 30px;
-            right: 50px;
-
-        }
-        .box .ullist li{
-            list-style: none;
+            margin-right: 5px;
+            border: solid 1px #704b4b;
             float: left;
-            width: 10px;
-            height: 10px;
-            border-radius: 100%;
-            background-color: #cfcfcf;
-            margin-left: 5px;
-            cursor: pointer;
         }
-        .active{
-            background-color: #e00c8f !important;
-        } */
+        .conter-list{
+            width: 180px;
+            height: 400px;
+            border: solid 1px #edf058;
+            float: left;
+        }
+        .conter-right{
+            width: 200px;
+            height: 400px;
+            border: solid 1px #5867f0;
+            float: right;
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <div class="box">
+        <div class="bigbox">
+            <div class="conter">
+                <div class="conter-left">
+                    <ul>
+                        <li v-for="(item,index) in textlist" key="index">
+                            <a href="#">
+                                <span v-for="(child,i) in item" key="i">
+                                    {{child}}/
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="conter-swiper">
+                    <div class="box">
+                        <a href="#">
+                            <img v-for="(item, index) in imgList" v-show="index===count" :src="item" :key="index"
+                             @mouseover="cleargo()" @mouseout="go()" :class="{lettershow:index===count}" alt="">
+                        </a>
+                        <span class="up" @mouseover="cleargo()" @mouseout="go()" @click="goup()"><</span>   
+                        <span class="next" @mouseover="cleargo()" @mouseout="go()" @click = "gonext()">></span>
+                        <ul class="ullist">
+                            <li v-for="(item,i) in imgList" :class="{active:i===count}" @click = "count = i"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="conter-list"></div>
+                <div class="conter-right"></div>
+            </div>
+        </div>
+        <!-- <div class="box">
             <a href="#">
                 <img v-for="(item, index) in imgList" v-show="index===count" :src="item" :key="index"
                  @mouseover="cleargo()" @mouseout="go()" :class="{lettershow:index===count}" alt="">
@@ -96,7 +102,7 @@
             <ul class="ullist">
                 <li v-for="(item,i) in imgList" :class="{active:i===count}" @click = "count = i"></li>
             </ul>
-        </div>
+        </div> -->
     </div>
 
     <script src="./vue.js"></script>
@@ -106,7 +112,25 @@
             data:{
                 imgList: ["img/icon01.jpg","img/icon02.jpg","img/icon03.jpg","img/icon04.jpg"],
                 count: 0,
-                clear: null
+                clear: null,
+                textlist: [
+                    ["家用电器"],
+                    ["手机","运营商","数码"],
+                    ["电脑","办公"],
+                    ["家具","家居","家装","厨具"],
+                    ["男装","女装","童装","内衣"],
+                    ["美妆","个护清洁","宠物"],
+                    ["女装","箱包","钟表","珠宝"],
+                    ["男鞋","运动","户外"],
+                    ["汽车","汽车用品","房产"],
+                    ["母婴","玩具","乐器"],
+                    ["食品","酒类","生鲜","特产"],
+                    ["艺术","礼品鲜花","农资绿植"],
+                    ["机票","酒店","旅游","生活"],
+                    ["理财","众筹","白条","保险"],
+                    ["安装","维修","清洗","二手"],
+                    ["工业品"]
+                ]
             },
             methods:{
                 go() {
